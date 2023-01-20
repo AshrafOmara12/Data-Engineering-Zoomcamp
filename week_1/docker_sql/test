@@ -1,0 +1,50 @@
+
+# run pgadmin image and use its app locally
+docker run -it^
+    -e PGADMIN_DEFAULT_EMAIL="admin@admin.com"^
+    -e PGADMIN_DEFAULT_PASSWORD="   "^
+    -p 8080:80^
+    dpage/pgadmin4
+# create docker network to make a connection between two different containers
+docker network create pg-network
+
+# run posgres image with mounting database between the filesys and the container with the created network
+docker run -it^
+    -e POSTGRES_USER="root"^
+    -e POSTGRES_PASSWORD="root"^
+    -e POSTGRES_DB="ny_taxi"^
+    -v F:\data_engineering_zoomcamp\Data_engineering_ZoomCamp\week_1\docker_sql\ny_taxi_postgress_data:/var/lib/postgresql/data^
+    -p 5432:5432^
+    --network=pg-network^
+    --name pg-database^
+    postgres:13
+
+
+# run pgadmin image with the same network
+
+docker run -it^
+    -e PGADMIN_DEFAULT_EMAIL="admin@admin.com"^
+    -e PGADMIN_DEFAULT_PASSWORD="root"^
+    -p 8080:80^
+    --network=pg-network^
+    --name pgadmin^
+    dpage/pgadmin4
+
+
+# convert .ipynb to .py
+jupyter nbconvert --to=script ingestion_data.ipynb
+
+
+# execute python script of ingestion
+python ingestion_data.py ^
+    --user=root ^
+    --password=root ^ 
+    --host=localhost ^
+    --port=5432 ^
+    --db=ny_taxi ^
+    --table_name=yellow_taxi_trips ^
+    --url="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-02.csv.gz"
+
+
+# build an image with the ingestion_data script
+docker build -t taxi_ingestion:V001 .

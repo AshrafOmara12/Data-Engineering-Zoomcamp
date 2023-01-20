@@ -1,0 +1,69 @@
+
+Question1:
+docker --help
+docker build --help
+
+docker build --iidfile string 
+
+Question2:
+docker run -it python:3.9 bash
+pip list
+Package    Version
+---------- -------
+pip        22.0.4
+setuptools 58.1.0
+wheel      0.38.4
+
+Question3:
+#run posgres container
+docker run -it 
+--name postgres_green_taxi_V1 
+-e POSTGRES_USER="root" 
+-e POSTGRES_PASSWORD="root" 
+-e POSTGRES_DB=ng_taxi 
+-v "F:\data_engineering_zoomcamp\Data_engineering_ZoomCamp\week_1\week_1_homework\gy_taxi_postgress_data:/var/lib/postgresql/data:rw" 
+-p "5432:5432" postgres:13
+
+Query:
+select COUNT(1) from green_taxi_data where DATE_TRUNC('day',lpep_pickup_
+ datetime)='2019-01-15' and DATE_TRUNC('day', lpep_dropoff_datetime)='2019-01-15';
+
+Question4:
+Query:
+select MAX(trip_distance), lpep_pickup_datetime from green_taxi_data GRO
+ UP BY lpep_pickup_datetime order by max desc ;
+
+ Question5: I think this question needs to be specified for the lpep_dropoff_datetime. Results changed based on this.
+ Query1:
+ select COUNT(1) from green_taxi_data where DATE_TRUNC('day',lpep_pickup_
+ datetime)='2019-01-01' and passenger_count = 2;
+ Query2:
+ select COUNT(1) from green_taxi_data where DATE_TRUNC('day',lpep_pickup_
+ datetime)='2019-01-01' and passenger_count = 3;
+
+question6:
+
+with cte 
+as 
+(select 
+    gx.lpep_pickup_datetime, 
+    gx.lpep_dropoff_datetime, 
+    gzp."Zone" as gzp_zone, 
+    gzd."Zone" as gzd_zone, 
+    gx.tip_amount 
+from 
+    green_taxi_data as gx 
+join green_zones as gzp 
+    on gx."PULocationID" = gzp."LocationID" 
+join green_zones as gzd 
+    on gx."DOLocationID" = gzd."LocationID")  
+ select 
+    gzp_zone , gzd_zone, max(tip_amount)     
+from
+  cte 
+where 
+    gzp_zone = 'Astoria'
+group by 
+    gzp_zone, gzd_zone 
+order by 
+    max desc;
