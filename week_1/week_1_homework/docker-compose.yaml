@@ -1,5 +1,5 @@
 services:
-  database:
+  database1:
     image: postgres:13
     environment:
       - POSTGRES_USER=root
@@ -9,7 +9,7 @@ services:
       - "./gy_taxi_postgress_data:/var/lib/postgresql/data:rw"
     ports:
       - "5432:5432"
-  pgadmin_1:
+  pgadmin_2:
     image: dpage/pgadmin4
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
