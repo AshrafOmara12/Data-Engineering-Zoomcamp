@@ -1,0 +1,56 @@
+###
+### A complete description of a Prefect Deployment for flow 'local-to-gcs-flow-parent'
+###
+name: parameterized local to gcs
+description: null
+version: 8d6fc518c73ea1e663cbbef66a0d6247
+# The work queue that will handle this deployment's runs
+work_queue_name: default
+tags: []
+parameters: {}
+schedule: null
+infra_overrides: {}
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  block_type_slug: process
+  _block_type_slug: process
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: local-to-gcs-flow-parent
+manifest_path: null
+storage: null
+path: F:\data_engineering_zoomcamp\Data_engineering_ZoomCamp\week_2\week_2_homework
+entrypoint: etl_gcs_bq.py:local_to_gcs_flow_parent
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties:
+    color:
+      title: color
+      default: yellow
+      position: 0
+      type: string
+    year:
+      title: year
+      default: 2019
+      position: 1
+      type: integer
+    months:
+      title: months
+      default:
+      - 2
+      - 3
+      position: 2
+      type: array
+      items:
+        type: integer
+  required: null
+  definitions: null
