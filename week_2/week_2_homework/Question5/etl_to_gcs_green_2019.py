@@ -8,7 +8,7 @@ import os
 @task(retries=3, log_prints=True)
 def get_data_from_url(url: str) -> pd.DataFrame:
     """extract tabular data from url"""
-    df_green_taxi = pd.read_csv(url)
+    df_green_taxi = pd.read_csv(url, nrows= 100)
     return df_green_taxi
 
 
