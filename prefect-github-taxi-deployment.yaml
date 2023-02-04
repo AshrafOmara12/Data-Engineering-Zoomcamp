@@ -1,0 +1,48 @@
+###
+### A complete description of a Prefect Deployment for flow 'etl-to-gcs'
+###
+name: flow-github
+description: null
+version: 3199d0329334f0845f9941cc54f96b12
+# The work queue that will handle this deployment's runs
+work_queue_name: github
+tags: []
+parameters: {}
+schedule: null
+infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: etl-to-gcs
+manifest_path: null
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  _block_document_id: a264edb1-a005-4fb9-8aa1-35bcbe5819fa
+  _block_document_name: anonymous-f0ef7e88-f4d9-4a6d-b931-e9b639e663f9
+  _is_anonymous: true
+  block_type_slug: process
+  _block_type_slug: process
+storage:
+  repository: https://github.com/AshrafOmara12/Data_engineering_ZoomCamp
+  reference: main
+  access_token: null
+  _block_document_id: 0b2b0902-550c-463f-943b-4d25d9921930
+  _block_document_name: github-prefect-hm
+  _is_anonymous: false
+  block_type_slug: github
+  _block_type_slug: github
+path: ''
+entrypoint: week_2\week_2_homework\flows\etl_to_gcs.py:etl_to_gcs
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties: {}
+  required: null
+  definitions: null
