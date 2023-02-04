@@ -3,6 +3,9 @@ from prefect_gcp import GcsBucket
 import pandas as pd
 from pathlib import Path
 import os
+from prefect.filesystems import GitHub
+
+github_block = GitHub.load("github-prefect-hm")
 
 
 @task(retries=3, log_prints=True)
