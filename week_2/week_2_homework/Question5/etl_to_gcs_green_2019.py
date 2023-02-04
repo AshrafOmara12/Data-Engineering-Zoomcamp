@@ -3,9 +3,10 @@ from prefect_gcp import GcsBucket
 import pandas as pd
 from pathlib import Path
 import os
+from prefect.tasks import task_input_hash
+from datetime import timedelta
 
-
-@task(retries=3, log_prints=True)
+@task(retries=3, log_prints=True, cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
 def get_data_from_url(url: str) -> pd.DataFrame:
     """extract tabular data from url"""
     df_green_taxi = pd.read_csv(url, nrows= 100)
