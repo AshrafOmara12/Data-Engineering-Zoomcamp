@@ -1,0 +1,56 @@
+###
+### A complete description of a Prefect Deployment for flow 'main-flow-to-bg'
+###
+name: main flow to bq
+description: get data from gcs to bq
+version: ea57146998b3ec24451cfa1fb15cf947
+# The work queue that will handle this deployment's runs
+work_queue_name: default
+tags: []
+parameters: {}
+schedule: null
+infra_overrides: {}
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  block_type_slug: process
+  _block_type_slug: process
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: main-flow-to-bg
+manifest_path: null
+storage: null
+path: F:\data_engineering_zoomcamp\Data_engineering_ZoomCamp\week_2\week_2_homework
+entrypoint: gcs_to_bg.py:main_flow_to_bg
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties:
+    color:
+      title: color
+      default: yellow
+      position: 0
+      type: string
+    year:
+      title: year
+      default: 2019
+      position: 1
+      type: integer
+    months:
+      title: months
+      default:
+      - 2
+      - 3
+      position: 2
+      type: array
+      items:
+        type: integer
+  required: null
+  definitions: null
