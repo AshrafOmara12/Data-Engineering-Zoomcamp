@@ -3,12 +3,10 @@ from prefect_gcp import GcsBucket
 import pandas as pd
 from pathlib import Path
 import os
-from prefect.filesystems import GitHub
+from prefect.tasks import task_input_hash
+from datetime import timedelta
 
-github_block = GitHub.load("github-prefect-hm")
-
-
-@task(retries=3, log_prints=True)
+@task(retries=3, log_prints=True, cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
 def get_data_from_url(url: str) -> pd.DataFrame:
     """extract tabular data from url"""
     df_green_taxi = pd.read_csv(url)
@@ -41,16 +39,16 @@ def upload_csv_to_gcs(path: Path) -> None:
 def etl_to_gcs():
     color = "green"
     year = 2020
-    month = 11
+    month = 1
     data_file = f"{color}_tripdata_{year}-0{month}"
-    data_url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{color}/{color}_tripdata_{year}-{month}.csv.gz"
+    data_url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{color}/{color}_tripdata_{year}-0{month}.csv.gz"
     print(data_url)
     df = get_data_from_url(data_url)
     file_path = convert_df_to_local_csv_file(df, color, data_file)
     upload_csv_to_gcs(file_path)
     print(file_path)
     print(df.shape)
-
+    print('hello from repo')
 
 if __name__ == "__main__":
     etl_to_gcs()

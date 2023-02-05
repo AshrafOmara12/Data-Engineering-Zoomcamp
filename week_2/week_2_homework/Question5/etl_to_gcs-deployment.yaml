@@ -1,15 +1,21 @@
 ###
 ### A complete description of a Prefect Deployment for flow 'etl-to-gcs'
 ###
-name: cloud-2019-April
+name: cloud-github
 description: null
-version: 4a934a34a85ce73f63137eecc82ef42a
+version: e85c53def36cb90feee19a12d2eb0693
 # The work queue that will handle this deployment's runs
-work_queue_name: default
+work_queue_name: question5
 tags: []
 parameters: {}
 schedule: null
 infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: etl-to-gcs
+manifest_path: null
 infrastructure:
   type: process
   env: {}
@@ -18,17 +24,22 @@ infrastructure:
   command: null
   stream_output: true
   working_dir: null
+  _block_document_id: 4b8cb7ab-5698-4ff7-9503-b6fd5ca1b5b1
+  _block_document_name: anonymous-6adc1ec0-a1df-4aed-b4ba-0be4545d433b
+  _is_anonymous: true
   block_type_slug: process
   _block_type_slug: process
-
-###
-### DO NOT EDIT BELOW THIS LINE
-###
-flow_name: etl-to-gcs
-manifest_path: null
-storage: null
-path: F:\data_engineering_zoomcamp\Data_engineering_ZoomCamp\week_2\week_2_homework\Question5
-entrypoint: etl_to_gcs_green_2019.py:etl_to_gcs
+storage:
+  repository: https://github.com/AshrafOmara12/Data_engineering_ZoomCamp.git
+  reference: main
+  access_token: null
+  _block_document_id: 75dbcf55-ba25-473e-9d2e-af14165ad605
+  _block_document_name: prefect-github-storage
+  _is_anonymous: false
+  block_type_slug: github
+  _block_type_slug: github
+path: ''
+entrypoint: week_2\week_2_homework\Question5\etl_to_gcs_green_2019.py:etl_to_gcs
 parameter_openapi_schema:
   title: Parameters
   type: object

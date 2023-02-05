@@ -1,9 +1,9 @@
 ###
 ### A complete description of a Prefect Deployment for flow 'etl-to-gcs'
 ###
-name: etl_flow_green
+name: question2
 description: null
-version: ee4f01235a2846b41667078f10716899
+version: c71f36fd61852b23254becd2c00b3093
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 tags: []
@@ -30,8 +30,8 @@ infrastructure:
 flow_name: etl-to-gcs
 manifest_path: null
 storage: null
-path: F:\data_engineering_zoomcamp\Data_engineering_ZoomCamp\week_2\week_2_homework
-entrypoint: etl_to_gcs.py:etl_to_gcs
+path: F:\data_engineering_zoomcamp\Data_engineering_ZoomCamp\week_2\week_2_homework\Question2
+entrypoint: etl_to_gcs_green_Jan_2020.py:etl_to_gcs
 parameter_openapi_schema:
   title: Parameters
   type: object
